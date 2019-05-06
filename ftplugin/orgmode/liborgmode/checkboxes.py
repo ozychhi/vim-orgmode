@@ -270,6 +270,25 @@ class Checkbox(DomObj):
 
 		return
 
+	def all_leaves_status(self):
+		u""" Return checkboxes status for currnet checkbox's all leaves
+
+		:return: (total, on)
+			total: total # of checkboxes
+			on:	   # of checkboxes which are on
+		"""
+		total, on = 0, 0
+		for c in self.all_children():
+			if c.children:
+				continue
+			if c.status is not None:
+				total += 1
+
+				if c.status == Checkbox.STATUS_ON:
+					on += 1
+
+		return (total, on)
+
 	def all_children_status(self):
 		u""" Return checkboxes status for currnet checkbox's all children
 

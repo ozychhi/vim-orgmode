@@ -192,7 +192,11 @@ class EditCheckbox(object):
 		c = h.first_checkbox
 		if c is None:
 			return
-		total, on = c.all_siblings_status()
+		total, on = 0, 0
+		for x in c.all_siblings():
+		    cur_total, cur_on = x.all_leaves_status()
+		    total += cur_total
+		    on += cur_on
 		h.update_subtasks(total, on)
 		# update all checkboxes under current heading
 		cls._update_checkboxes_subtasks(c)
@@ -202,7 +206,7 @@ class EditCheckbox(object):
 		# update checkboxes
 		for c in checkbox.all_siblings():
 			if c.children:
-				total, on = c.first_child.all_siblings_status()
+				total, on = c.all_leaves_status()
 				c.update_subtasks(total, on)
 				cls._update_checkboxes_subtasks(c.first_child)
 
