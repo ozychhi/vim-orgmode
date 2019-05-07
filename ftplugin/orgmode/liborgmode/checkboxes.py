@@ -277,6 +277,9 @@ class Checkbox(DomObj):
 			total: total # of checkboxes
 			on:	   # of checkboxes which are on
 		"""
+		if not self.children:
+		    return (1, int(self.status == Checkbox.STATUS_ON))
+
 		total, on = 0, 0
 		for c in self.all_children():
 			if c.children:
