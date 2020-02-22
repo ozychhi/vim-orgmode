@@ -177,8 +177,9 @@ class EditCheckbox(object):
 				d.write_checkbox(c)
 
 		elif c.status == Checkbox.STATUS_INT:
-			# can't toggle intermediate state directly according to emacs orgmode
-			pass
+		    c.status = Checkbox.STATUS_ON
+		    for child in c.all_children():
+			child.status = Checkbox.STATUS_ON
 		# update checkboxes status
 		cls.update_checkboxes_status()
 
