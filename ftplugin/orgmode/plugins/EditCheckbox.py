@@ -177,9 +177,9 @@ class EditCheckbox(object):
 				d.write_checkbox(c)
 
 		elif c.status == Checkbox.STATUS_INT:
-		    c.status = Checkbox.STATUS_ON
-		    for child in c.all_children():
-			child.status = Checkbox.STATUS_ON
+			c.status = Checkbox.STATUS_ON
+			for child in c.all_children():
+				child.status = Checkbox.STATUS_ON
 		# update checkboxes status
 		cls.update_checkboxes_status()
 
@@ -195,9 +195,9 @@ class EditCheckbox(object):
 			return
 		total, on = 0, 0
 		for x in c.all_siblings():
-		    cur_total, cur_on = x.all_leaves_status()
-		    total += cur_total
-		    on += cur_on
+			cur_total, cur_on = x.all_leaves_status()
+			total += cur_total
+			on += cur_on
 		h.update_subtasks(total, on)
 		# update all checkboxes under current heading
 		cls._update_checkboxes_subtasks(c)
